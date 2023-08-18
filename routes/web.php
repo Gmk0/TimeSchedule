@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin', \App\Livewire\Admin\DashboardAdmin::class)->name('adminDashboard');
+Route::get('/admin/professeur', \App\Livewire\Admin\ProfesseurAdmin::class)->name('adminProfesseur');
+Route::get('/admin/cours', \App\Livewire\Admin\CoursAdmin::class)->name('adminCours');
+
+Route::get('/', \App\Livewire\Web\Home::class)->name('home');
+
+Route::get('/professeur', \App\Livewire\Web\ProfesseurList::class);
+
+Route::get('/professeur/{id}', \App\Livewire\Web\ProfesseurOne::class)->name('professeurOne');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +35,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
