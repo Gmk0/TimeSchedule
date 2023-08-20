@@ -7,8 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIME SCHEDULE</title>
 
+    <link rel="stylesheet" href="/build/assets/app.css">
 
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    <script src="/build/assets/app.js" defer></script>
+
+    <script>
+        document.addEventListener('Keydown', (e)=>{
+
+            if(!e.target.hasAttribute('wire:navigate'))
+            return;
+
+            if(e.key.toLowerCase() == 'enter')
+            Alpine.navigate(e.target.href);
+
+        });
+
+    </script>
+
+
+
+
+
+
 </head>
 
 <body>
