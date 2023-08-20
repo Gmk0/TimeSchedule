@@ -13,7 +13,22 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="/build/assets/app.css">
+
+    <script src="/build/assets/app.js" defer></script>
+
+    <script>
+        document.addEventListener('Keydown', (e)=>{
+
+            if(!e.target.hasAttribute('wire:navigate'))
+            return;
+
+            if(e.key.toLowerCase() == 'enter')
+            Alpine.navigate(e.target.href);
+
+        });
+
+    </script>
 
     @livewireStyles
 </head>
