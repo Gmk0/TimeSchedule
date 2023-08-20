@@ -55,64 +55,40 @@
                 </div>
                 <!-- Apps -->
 
-                <button type="button"
-                    class="flex flex-shrink-0 mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                    id="userMenuDropdownButton" aria-expanded="false" data-dropdown-toggle="userMenuDropdown">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                </button>
-                <!-- Dropdown menu -->
-                <div class="z-50 hidden w-56 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                    id="userMenuDropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm font-semibold text-gray-900 dark:text-white">Neil Sims</span>
-                        <span
-                            class="block text-sm font-light text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-                    </div>
-                    <ul class="py-1 font-light text-gray-500 dark:text-gray-400"
-                        aria-labelledby="userMenuDropdownButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My
-                                profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Account
-                                settings</a>
-                        </li>
-                    </ul>
-                    <ul class="py-1 font-light text-gray-500 dark:text-gray-400"
-                        aria-labelledby="userMenuDropdownButton">
-                        <li>
-                            <a href="#"
-                                class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><svg
-                                    class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                        clip-rule="evenodd"></path>
-                                </svg> My likes</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><svg
-                                    class="w-5 h-5 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z">
-                                    </path>
-                                </svg> Collections</a>
-                        </li>
-                    </ul>
-                    <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
-                                out</a>
-                        </li>
-                    </ul>
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <div>{{ Auth::user()->name }}</div>
+
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
                 </div>
 
                 <button type="button" id="toggleMobileMenuButton" data-collapse-toggle="toggleMobileMenu"
